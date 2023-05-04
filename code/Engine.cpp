@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include <vector>
 
 Engine::Engine()
 {
@@ -31,6 +32,10 @@ void Engine::run()
 
 void Engine::input()
 {
+
+	int max = 50;
+	int min = 25;
+
 	Event event;
 	while (m_Window.pollEvent(event))
 	{
@@ -38,45 +43,56 @@ void Engine::input()
 		{
 			m_Window.close();
 		}
-
-		/*if (event.type == Event::MouseButtonPressed)
-		{
-			mouseClick = window.mapPixelToCoords(Mouse::getPosition(), plane.getView());
-
-			if (Mouse::isButtonPressed(Mouse::Left))
-			{
-				plane.zoomIn();
-				plane.setCenter(mouseClick);
-			}
-			if (Mouse::isButtonPressed(Mouse::Right))
-			{
-				plane.zoomOut();
-				plane.setCenter(mouseClick);
-
-			}
-			state = State::CALCULATING;
-		}
-		if (event.type == Event::MouseMoved)
-		{
-			mousePosition = window.mapPixelToCoords(Mouse::getPosition(), plane.getView());
-			plane.setMouseLocation(mousePosition);
-		}*/
+		
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
 		{
 			m_Window.close();
 		}
+
+		if (Mouse::isButtonPressed(Mouse::Left))
+		{
+			srand(time(0));
+			int randPoints = rand() % (max - min + 1) + min;
+			
+			
+			for (int i = 0; i < 5; i++)
+			{
+				Particle goingIntoArray(m_Window,randPoints,Mouse::getPosition());
+				m_particles.push_back(goingIntoArray);
+			}
+		}	
 	}
 	
 }
 
 void Engine::update(float dtAsSeconds)
 {
-
+	//Strugling with the iterator
+	vector<Particle>::iterator it;
+	int i = 0;
+	for ( it = m_particles.begin(); it != m_particles.end();)
+	{
+		if (m_particles.at(i).getTTL() > 0)
+		{
+			m_particles.at(i).update(dtAsSeconds);
+			it++;
+			i++;
+		}
+		else
+		{
+			it = m_particles.erase(it);
+		}
+	}
 }
 
 void Engine::draw()
 {
 	m_Window.clear();
+
+	for (Particle p : m_particles)
+	{
+		m_Window.draw(p);
+	}
 	
 	m_Window.display();
 }
