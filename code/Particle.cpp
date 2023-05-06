@@ -1,6 +1,5 @@
 #include "Particle.h"
 
-
 Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosition) : m_A(2, numPoints)
 {
     m_ttl = TTL;
@@ -9,7 +8,17 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
     m_cartesianPlane.setCenter(0, 0);
     m_cartesianPlane.setSize(target.getSize().x, (-1.0) * target.getSize().y);
     // Unfinished
+    m_centerCoordinate = target.mapPixelToCoords(mouseClickPosition, m_cartesianPlane);
+    
+    /*Inital velocities (We can change these later)*/
+    m_vx = 300.0f;
+    m_vy = 150.0f;
 
+    /*Colors (Change later)*/
+    m_color1.White;
+    m_color2.Magenta;
+
+    
 }
 
 
