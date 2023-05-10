@@ -53,10 +53,9 @@ void Engine::input()
 		{
 			if (Mouse::isButtonPressed(Mouse::Left))
 			{
-				srand(time(0));
 				int numPoints = rand() % (max - min + 1) + min;
-				cout << "randPoint" << endl;
 
+				/*How many do we want to construct*/
 				for (int i = 0; i < 5; i++)
 				{
 					Particle goingIntoArray(m_Window, numPoints, Mouse::getPosition());
