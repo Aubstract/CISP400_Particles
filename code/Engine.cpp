@@ -6,7 +6,7 @@ Engine::Engine()
 	float width = VideoMode::getDesktopMode().width;
 	float height = VideoMode::getDesktopMode().height;
 
-	m_Window.create(VideoMode(width, height), "Particles", Style::Default);
+	m_Window.create(VideoMode(width, height), "Particles", Style::Fullscreen);
 }
 
 void Engine::run()
