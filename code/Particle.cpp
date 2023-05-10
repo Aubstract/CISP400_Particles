@@ -10,7 +10,7 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
     m_centerCoordinate = target.mapPixelToCoords(mouseClickPosition, m_cartesianPlane);
     
     /*Inital velocities (We can change these later)*/
-    float max = 500;
+    float max = 600;
     float min = 100;
   
     m_vx = (max - min) * ((float)rand() / RAND_MAX) + min;
@@ -21,7 +21,7 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
     m_vy = (max - min) * ((float)rand() / RAND_MAX) + min;
     
     // Assign colors
-    Color rainbow[6] = { Color::Red, Color::Yellow, Color::Green, Color::Cyan, Color::Blue, Color::Magenta };
+    Color rainbow[6] = { Color::Red, Color::Yellow, Color::Green, Color::Cyan, Color::Blue, Color::Magenta};
 
     m_color1 = Color::White;
     m_color2 = rainbow[rand() % 6];
@@ -29,10 +29,10 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
     // Create vertices of particle
     float theta = (float)rand() / (RAND_MAX / (PI / 2));
     float dTheta = 2 * PI / (numPoints - 1);
-
+    
     for (int j = 0; j < numPoints; j++)
     {
-        int r = rand() % (80 - 20 + 1) + 20;
+        int r = rand() % (100 - 20) + 20;
         float dx = r * cos(theta);
         float dy = r * sin(theta);
 
