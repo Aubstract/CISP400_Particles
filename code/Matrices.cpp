@@ -116,8 +116,8 @@ namespace Matrices
     {
         a.at(0).at(0) = scale;
         a.at(0).at(1) = 0;
-        a.at(1).at(0) = scale;
-        a.at(1).at(1) = 0;
+        a.at(1).at(0) = 0;
+        a.at(1).at(1) = scale;
     }
 
     TranslationMatrix::TranslationMatrix(double xShift, double yShift, int nCols) : Matrix(2,nCols)
