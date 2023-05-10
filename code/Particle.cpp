@@ -12,10 +12,12 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
     /*Inital velocities (We can change these later)*/
     m_vx = 300.0f;
     m_vy = 150.0f;
+    
+    // Assign colors
+    Color rainbow[6] = { Color::Red, Color::Yellow, Color::Green, Color::Cyan, Color::Blue, Color::Magenta };
 
-    /*Colors (Change later)*/
-    m_color1.White;
-    m_color2.Magenta;
+    m_color1 = Color::White;
+    m_color2 = rainbow[rand() % 6];
 
     // Create vertices of particle
     float theta = (float)rand() / (RAND_MAX / (M_PI / 2));
@@ -44,7 +46,7 @@ void Particle::draw(RenderTarget& target, RenderStates states) const
 
     for (int j = 1; j <= m_numPoints; j++)
     {
-        lines[j].position = 
+        lines[j].position =
     }
 }
 
