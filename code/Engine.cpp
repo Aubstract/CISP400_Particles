@@ -49,18 +49,21 @@ void Engine::input()
 			m_Window.close();
 		}
 
-		if (Mouse::isButtonPressed(Mouse::Left))
+		if (event.type == Event::MouseButtonPressed)
 		{
-			srand(time(0));
-			int randPoints = rand() % (max - min + 1) + min;
-			
-			
-			for (int i = 0; i < 5; i++)
+			if (Mouse::isButtonPressed(Mouse::Left))
 			{
-				Particle goingIntoArray(m_Window,randPoints,Mouse::getPosition());
-				m_particles.push_back(goingIntoArray);
+				srand(time(0));
+				int numPoints = rand() % (max - min + 1) + min;
+				cout << "randPoint" << endl;
+
+				for (int i = 0; i < 5; i++)
+				{
+					Particle goingIntoArray(m_Window, numPoints, Mouse::getPosition());
+					m_particles.push_back(goingIntoArray);
+				}
 			}
-		}	
+		}
 	}
 	
 }
@@ -88,7 +91,7 @@ void Engine::update(float dtAsSeconds)
 void Engine::draw()
 {
 	m_Window.clear();
-
+	
 	for (Particle p : m_particles)
 	{
 		m_Window.draw(p);

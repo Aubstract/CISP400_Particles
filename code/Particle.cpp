@@ -10,8 +10,15 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
     m_centerCoordinate = target.mapPixelToCoords(mouseClickPosition, m_cartesianPlane);
     
     /*Inital velocities (We can change these later)*/
-    m_vx = 300.0f;
-    m_vy = 150.0f;
+    float max = 500;
+    float min = 100;
+  
+    m_vx = (max - min) * ((float)rand() / RAND_MAX) + min;
+    if (rand() % 2 != 0)
+    {
+        m_vx *= -1;
+    }
+    m_vy = (max - min) * ((float)rand() / RAND_MAX) + min;
     
     // Assign colors
     Color rainbow[6] = { Color::Red, Color::Yellow, Color::Green, Color::Cyan, Color::Blue, Color::Magenta };
@@ -53,6 +60,7 @@ void Particle::draw(RenderTarget& target, RenderStates states) const
         lines[j].position = (Vector2f)target.mapCoordsToPixel(coords, m_cartesianPlane);
         lines[j].color = m_color2;
     }
+    target.draw(lines);
 }
 
 void Particle::update(float dt)
